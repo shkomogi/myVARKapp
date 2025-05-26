@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question {{ current_question_num }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h2 { color: #0056b3; }
+        .progress-bar {
+            width: 100%;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            height: 20px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background-color: #4CAF50; /* Green */
+            width: {{ (current_question_num / total_questions) * 100 }}%;
+            border-radius: 5px;
+            text-align: center;
+            color: white;
+            line-height: 20px; /* Center text vertically */
+            font-size: 0.8em;
+        }
+        .options { margin-top: 20px; }
+        .option-item { margin-bottom: 15px; display: flex; align-items: flex-start; }
+        .option-item input[type="checkbox"] { margin-top: 5px; margin-right: 10px; }
+        .submit-button {
+            display: block;
+            width: 150px;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover { background-color: #0056b3; }
+        .error-message { color: red; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Question {{ current_question_num }} of {{ total_questions }}</h2>
+        <div class="progress-bar">
+            <div class="progress">{{ current_question_num }} / {{ total_questions }}</div>
+        </div>
+
+        <p>{{ question_text }}</p>
+
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <div class="options">
+                {% for option_char in ['a', 'b', 'c', 'd'] %}
+                    {% set option_text = options[loop.index0] %}
+                    <div class="option-item">
+                        <input type="checkbox" id="option_{{ option_char }}" name="option" value="{{ option_char }}">
+                        <label for="option_{{ option_char }}">{{ option_text }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="submit-button">Next Question</button>
+        </form>
+    </div>
+</body>
+</html>

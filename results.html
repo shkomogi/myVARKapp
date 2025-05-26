@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VARK Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #0056b3; text-align: center; }
+        .results-section { margin-top: 30px; }
+        .vark-counts ul { list-style: none; padding: 0; display: flex; justify-content: center; gap: 20px; }
+        .vark-counts li {
+            background-color: #e9ecef;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #495057;
+            text-align: center;
+            min-width: 100px;
+        }
+        .vark-counts li span { display: block; font-size: 1.8em; color: #007bff; margin-top: 5px; }
+        .learning-style {
+            text-align: center;
+            font-size: 1.3em;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            border-radius: 8px;
+        }
+        .learning-style strong { color: #007bff; }
+        .restart-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px 25px;
+            background-color: #6c757d;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        .restart-button:hover { background-color: #5a6268; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>VARK Questionnaire Results</h1>
+
+        <div class="results-section">
+            <h2>Your VARK Scores:</h2>
+            <div class="vark-counts">
+                <ul>
+                    <li>Visual <span>{{ vark_counts.V }}</span></li>
+                    <li>Auditory <span>{{ vark_counts.A }}</span></li>
+                    <li>Read/Write <span>{{ vark_counts.R }}</span></li>
+                    <li>Kinesthetic <span>{{ vark_counts.K }}</span></li>
+                </ul>
+            </div>
+
+            <h2>Your Learning Style:</h2>
+            <div class="learning-style">
+                {% if highest_styles %}
+                    {% if highest_styles|length == 1 %}
+                        Your primary learning style is <strong>{{ highest_styles[0] }}</strong>.
+                    {% else %}
+                        Your learning style has multiple preferences (Multimodal):
+                        <br>
+                        <strong>
+                            {% for style in highest_styles %}
+                                {{ style }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </strong>
+                    {% endif %}
+                {% else %}
+                    No specific learning style could be determined based on your responses.
+                {% endif %}
+            </div>
+        </div>
+
+        <a href="{{ url_for('index') }}" class="restart-button">Start Over</a>
+    </div>
+</body>
+</html>

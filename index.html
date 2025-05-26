@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VARK Questionnaire App</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; color: #333; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1, h2 { color: #0056b3; text-align: center; }
+        .start-button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px 25px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+        .start-button:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the VARK Questionnaire App!</h1>
+        <p style="text-align: center;">
+            This application helps you understand your preferred learning style based on the VARK model (Visual, Auditory, Read/Write, Kinesthetic).
+        </p>
+        <p style="text-align: center;">
+            For each question, choose the option(s) that best explain your preference. You may select more than one option if it applies.
+        </p>
+        <a href="{{ url_for('question', question_id=1) }}" class="start-button">Start Questionnaire</a>
+    </div>
+</body>
+</html>
